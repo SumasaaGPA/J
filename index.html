@@ -151,6 +151,37 @@ a:hover { text-decoration: underline; }
 .h-date { text-align: right; color: var(--muted); font-size: 12.5px; }
 .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 99px; background: #24335e; color: #c8d2ee; margin-left: 4px; vertical-align: 1px; white-space: nowrap; }
 .tag-t { background: #5a1c22; color: #ffcfd3; }
+.tag-b { background: #173f3a; color: #c6f5ea; }
+.tag-done { background: #1d6b45; color: #d7ffe8; }
+
+/* 予選ブロックの星取表 */
+.block .row-between { margin-bottom: 4px; }
+.block .section-title { margin: 0; }
+.table-scroll { overflow-x: auto; margin: 10px -4px 8px; padding: 0 4px; }
+.cross { border-collapse: collapse; width: 100%; font-size: 14px; }
+.cross th, .cross td { border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: middle; }
+.cross thead th { font-size: 12px; color: var(--muted); font-weight: 700; text-align: left; white-space: nowrap; }
+.cross .x { width: 38px; min-width: 38px; text-align: center; font-family: "Roboto Condensed", sans-serif; font-size: 16px; }
+.cross thead .x { text-align: center; }
+.cross td.x { border-left: 1px solid #ffffff0c; }
+.cross .self { background: #ffffff08; color: var(--muted); }
+.cross .win { color: var(--up); }
+.cross .lose { color: var(--down); }
+.cross .c-rank { width: 64px; white-space: nowrap; }
+.cross .c-num { width: 40px; text-align: center; font-family: "Roboto Condensed", sans-serif; font-size: 16px; }
+.cross .c-name { min-width: 200px; }
+.cross .c-name a { display: flex; align-items: center; gap: 8px; color: var(--text); }
+.cross .c-name a:hover { text-decoration: none; color: #fff; }
+.b-no { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-family: "Roboto Condensed", sans-serif; font-size: 12px; background: #24335e; color: #c8d2ee; }
+.b-names { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; font-weight: 700; }
+.b-names small { font-weight: 400; color: var(--muted); font-size: 11.5px; }
+.b-rank { font-family: "Roboto Condensed", sans-serif; font-size: 20px; font-weight: 700; margin-right: 2px; }
+.b-rank1 { color: var(--gold); }
+.b-rank2 { color: var(--silver); }
+.b-rank3 { color: var(--bronze); }
+.block-opt { margin-bottom: 18px; }
+.block-opt .seg span { font-weight: 700; }
+.block-note { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
 
 .form .field { margin-bottom: 18px; }
 .form label, .form .label { display: block; font-size: 13px; font-weight: 700; color: #c5cee3; margin-bottom: 6px; }
@@ -275,6 +306,13 @@ label.btn { margin: 0 6px 6px 0; color: var(--text); }
   .h-after { grid-area: after; font-size: 12.5px; }
   .h-after::before { content: "→ "; color: var(--muted); }
   .h-date { grid-area: date; text-align: left; font-size: 11.5px; }
+  .cross { font-size: 13px; }
+  .cross .c-name { min-width: 128px; }
+  .cross .c-name .mini-logo { display: none; }
+  .cross .c-rank { width: 44px; }
+  .cross .c-rank .tag { display: block; width: fit-content; margin: 2px 0 0; }
+  .cross .x { width: 32px; min-width: 32px; }
+  .cross th, .cross td { padding: 7px 4px; }
   .versus { grid-template-columns: 1fr; gap: 0; }
   .versus .vs { padding: 0 0 10px; text-align: center; font-size: 18px; }
   .seg { display: grid; grid-template-columns: 1fr; }
@@ -299,6 +337,7 @@ label.btn { margin: 0 6px 6px 0; color: var(--text); }
   <nav class="main-nav">
     <div class="wrap nav-inner">
       <a href="#/" class="nav-item" data-nav="ranking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h4V10H3v10zm7 0h4V4h-4v16zm7 0h4v-7h-4v7z"/></svg><span>ランキング</span></a>
+      <a href="#/blocks" class="nav-item" data-nav="blocks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm8-2h8v8h-8v-8zm2 2v4h4v-4h-4z"/></svg><span>予選</span></a>
       <a href="#/circles" class="nav-item" data-nav="circles"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4a6 6 0 104.47 10.03l4.75 4.75 1.41-1.41-4.75-4.75A6 6 0 0010 4zm0 2a4 4 0 110 8 4 4 0 010-8z"/></svg><span>サークル検索</span></a>
       <a href="#/match" class="nav-item" data-nav="match"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v2h-2v2a5 5 0 01-4 4.9V15h3v2H8v-2h3v-3.1A5 5 0 017 7V5H5V3zm4 2v2a3 3 0 006 0V5H9zM6 19h12v2H6z"/></svg><span>勝敗登録</span></a>
       <a href="#/settings" class="nav-item" data-nav="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm8.94 3a9 9 0 00-.32-1.6l2-1.55-2-3.46-2.36.96a8.9 8.9 0 00-2.77-1.6L15 1h-4l-.49 2.75a8.9 8.9 0 00-2.77 1.6l-2.36-.96-2 3.46 2 1.55a9 9 0 000 3.2l-2 1.55 2 3.46 2.36-.96a8.9 8.9 0 002.77 1.6L11 23h4l.49-2.75a8.9 8.9 0 002.77-1.6l2.36.96 2-3.46-2-1.55c.2-.52.3-1.06.32-1.6z"/></svg><span>設定</span></a>
@@ -439,6 +478,62 @@ async function fetchRanking() {
   return list;
 }
 
+// ================================================================ 予選ブロック
+// 予選ブロックの表がまだ無い（更新用 SQL を流す前の）データベースでは null を返し、他の機能はそのまま動かす
+async function fetchBlocks() {
+  let blocks, members, matches;
+  try {
+    [blocks, members, matches] = await Promise.all([
+      rest('blocks?select=id,name&order=name.asc,id.asc'),
+      rest('block_members?select=block_id,circle_id'),
+      rest('block_matches?select=block_id,event_id,winner_id,loser_id'),
+    ]);
+  } catch (e) {
+    if (/blocks|block_members|block_matches/.test(e.message)) return null;
+    throw e;
+  }
+  return blocks
+    .sort((a, b) => a.name.localeCompare(b.name, 'ja', { numeric: true }) || a.id - b.id)
+    .map(b => ({
+      ...b,
+      members: members.filter(m => m.block_id === b.id).map(m => m.circle_id),
+      matches: matches.filter(m => m.block_id === b.id),
+    }));
+}
+const pairKey = (a, b) => a < b ? `${a}-${b}` : `${b}-${a}`;
+function playedPair(block, a, b) { return block.matches.some(m => pairKey(m.winner_id, m.loser_id) === pairKey(a, b)); }
+
+// ブロック内順位（レートとは無関係）。
+// 勝ち数 → 同数なら当該サークル間の直接対決の勝ち数で再比較（2 チームなら直接対決そのもの）。
+// それでも差がつかない（三つ巴など）グループは同列とする。
+function blockStandings(block) {
+  const ids = block.members;
+  const inBlock = new Set(ids);
+  const ms = block.matches.filter(m => inBlock.has(m.winner_id) && inBlock.has(m.loser_id));
+  const beat = new Set(ms.map(m => `${m.winner_id}>${m.loser_id}`));
+  const wins = new Map(ids.map(id => [id, 0])), losses = new Map(ids.map(id => [id, 0]));
+  ms.forEach(m => { wins.set(m.winner_id, wins.get(m.winner_id) + 1); losses.set(m.loser_id, losses.get(m.loser_id) + 1); });
+  const total = ids.length * (ids.length - 1) / 2;
+  const complete = ids.length >= 2 && ms.length >= total;
+
+  // score(id) の値ごとにグループ化（降順）
+  const split = (group, score) => {
+    const vals = [...new Set(group.map(score))].sort((a, b) => b - a);
+    return vals.map(v => group.filter(id => score(id) === v));
+  };
+  // 直接対決で順位を付ける。差がつかなければそのグループは同列
+  const resolve = group => {
+    if (group.length <= 1) return [group];
+    const parts = split(group, id => group.filter(o => o !== id && beat.has(`${id}>${o}`)).length);
+    return parts.length === 1 ? [group] : parts.flatMap(resolve);
+  };
+  const tiers = split(ids, id => wins.get(id)).flatMap(resolve);
+  const rank = new Map();
+  let pos = 1;
+  tiers.forEach(t => { t.forEach(id => rank.set(id, { rank: pos, tied: t.length > 1 })); pos += t.length; });
+  return { order: tiers.flat(), rank, wins, losses, beat, played: ms.length, total, complete };
+}
+
 // ================================================================ 管理者ログイン状態
 let adminToken = lsGet('gpaAdminToken');
 function setAdmin(token) {
@@ -459,6 +554,7 @@ async function adminRpc(fn, args = {}) {
 let seq = 0, refresher = null;
 const routes = [
   [/^\/?$/, 'ranking', viewRanking],
+  [/^\/blocks$/, 'blocks', viewBlocks],
   [/^\/circles$/, 'circles', viewCircles],
   [/^\/circles\/(\d+)$/, 'circles', viewCircle],
   [/^\/match$/, 'match', viewMatch],
@@ -530,6 +626,63 @@ function viewRanking(_, alive) {
   load();
 }
 
+// ================================================================ 予選
+function viewBlocks(_, alive) {
+  document.title = '予選 | スマサーGPA';
+  view.innerHTML = `<h1 class="page-title">予選ブロック</h1>
+    <p class="muted small">ブロック内の総当たりが終わると順位が表示されます。順位は勝ち数で決まり、同数のときは直接対決の結果で決めます（三つ巴などで決まらない場合は同列）。レートとは関係ありません。</p>
+    <div id="blocks"><section class="panel"><p class="loading">読み込み中…</p></section></div>`;
+  async function load() {
+    try {
+      const [blocks, list] = await Promise.all([fetchBlocks(), fetchRanking()]);
+      if (!alive()) return;
+      if (blocks === null) { $('blocks').innerHTML = '<section class="panel"><p class="muted">予選機能は準備中です。</p></section>'; return; }
+      if (!blocks.length) { $('blocks').innerHTML = '<section class="panel"><p class="muted">現在、予選ブロックはありません。</p></section>'; return; }
+      const byId = new Map(list.map(c => [c.id, c]));
+      $('blocks').innerHTML = blocks.map(b => blockTableHtml(b, byId)).join('');
+    } catch (e) {
+      if (alive() && $('blocks').querySelector('.loading')) $('blocks').innerHTML = `<section class="panel"><p class="error">${esc(e.message)}</p></section>`;
+    }
+  }
+  refresher = load;
+  load();
+}
+
+function blockTableHtml(b, byId) {
+  // 番号はメンバーの大学名の読み順で固定（列見出しと行の対応用）
+  const members = b.members.map(id => byId.get(id)).filter(Boolean).sort(byKana);
+  const no = new Map(members.map((c, i) => [c.id, i + 1]));
+  const block = { ...b, members: members.map(c => c.id) };
+  const st = blockStandings(block);
+  const rows = st.complete ? st.order.map(id => byId.get(id)) : members;
+  const status = members.length < 2 ? '<span class="tag">メンバー登録待ち</span>'
+    : st.complete ? '<span class="tag tag-done">全試合終了</span>'
+    : `<span class="tag">${st.played} / ${st.total} 試合</span>`;
+  const cell = (r, c) => {
+    if (r.id === c.id) return '<td class="x self" aria-label="自分">―</td>';
+    if (st.beat.has(`${r.id}>${c.id}`)) return `<td class="x win" title="${esc(r.name)} が ${esc(c.name)} に勝利">○</td>`;
+    if (st.beat.has(`${c.id}>${r.id}`)) return `<td class="x lose" title="${esc(r.name)} が ${esc(c.name)} に敗北">●</td>`;
+    return '<td class="x"></td>';
+  };
+  return `<section class="panel block">
+    <div class="row-between"><h2 class="section-title">${esc(b.name)}</h2>${status}</div>
+    ${members.length ? `<div class="table-scroll"><table class="cross">
+      <thead><tr><th class="c-rank">順位</th><th class="c-name">サークル</th>
+        ${members.map(c => `<th class="x" title="${esc(c.name)}">${no.get(c.id)}</th>`).join('')}
+        <th class="c-num">勝</th><th class="c-num">負</th></tr></thead>
+      <tbody>${rows.map(r => {
+        const rk = st.rank.get(r.id);
+        const rankHtml = st.complete ? `<span class="b-rank b-rank${rk.rank}">${rk.rank}</span>${rk.tied ? '<span class="tag">同列</span>' : ''}` : '<span class="muted">―</span>';
+        return `<tr><td class="c-rank">${rankHtml}</td>
+          <td class="c-name"><a href="#/circles/${r.id}"><span class="b-no">${no.get(r.id)}</span>${logoHtml(r, 'mini-logo')}<span class="b-names"><small>${esc(r.university)}</small>${esc(r.name)}</span></a></td>
+          ${members.map(c => cell(r, c)).join('')}
+          <td class="c-num">${st.wins.get(r.id)}</td><td class="c-num">${st.losses.get(r.id)}</td></tr>`;
+      }).join('')}</tbody></table></div>
+      ${!st.complete && members.length >= 2 ? `<p class="muted small">総当たりが終わると順位が表示されます（残り ${st.total - st.played} 試合）。</p>` : ''}`
+    : '<p class="muted">メンバーが登録されていません。</p>'}
+  </section>`;
+}
+
 // ================================================================ サークル検索
 function viewCircles(_, alive) {
   document.title = 'サークル検索 | スマサーGPA';
@@ -562,8 +715,10 @@ async function viewCircle([id], alive) {
     <section class="panel"><h2 class="section-title">レート変動履歴</h2><div id="history"></div></section>`;
   const KIND = { match: '対戦', simple: '過去試合', bonus: 'ボーナス', adjust: '管理者調整', normalize: 'レート均一化' };
   try {
-    const [list, hist] = await Promise.all([fetchRanking(), rest(`history?circle_id=eq.${Number(id)}&order=id.desc`)]);
+    const [list, hist, blocks] = await Promise.all([fetchRanking(), rest(`history?circle_id=eq.${Number(id)}&order=id.desc`), fetchBlocks()]);
     if (!alive()) return;
+    const blockByEvent = new Map();
+    (blocks || []).forEach(b => b.matches.forEach(m => blockByEvent.set(m.event_id, b.name)));
     const c = list.find(x => x.id === Number(id));
     if (!c) { $('profile').innerHTML = '<p class="error">サークルが見つかりません</p>'; return; }
     document.title = `${c.name} | スマサーGPA`;
@@ -587,6 +742,7 @@ async function viewCircle([id], alive) {
         const tags = [];
         if (r.kind === 'match' && r.weight > 1) tags.push('<span class="tag tag-t">トーナメント</span>');
         if (r.kind === 'simple') tags.push('<span class="tag">過去試合</span>');
+        if (blockByEvent.has(r.event_id)) tags.push(`<span class="tag tag-b">${esc(blockByEvent.get(r.event_id))}</span>`);
         main = `<span class="res res-${r.result}">${r.result === 'win' ? '勝' : '負'}</span>
           <span class="h-main">vs ${opp} ${tags.join('')}${r.reason ? `<span class="h-reason">${esc(r.reason)}</span>` : ''}</span>`;
       } else {
@@ -620,15 +776,35 @@ function viewMatch(_, alive) {
         <label><input type="radio" name="weight" value="normal" checked><span>通常試合</span></label>
         <label><input type="radio" name="weight" value="tournament"><span>トーナメント試合（×${TOURNAMENT_WEIGHT}）</span></label>
       </div></div>
+    <div class="field block-opt" id="blockOpt" hidden><span class="label">予選ブロック</span>
+      <div class="seg" id="blockSeg"></div><p class="block-note" id="blockNote"></p></div>
     <div id="preview" class="preview" hidden></div>
     <p id="msg" class="error" hidden></p>
     <button class="btn primary block" id="submit" type="submit" disabled>登録する</button>
   </form>
   <dialog id="confirm" class="dialog"><h2>この内容で登録しますか？</h2><div id="confirmBody"></div>
     <div class="dialog-actions"><button class="btn" type="button" id="cancel">戻る</button><button class="btn primary" type="button" id="ok">登録する</button></div></dialog>`;
-  let circles = {}, winner = null;
+  // blockPick: null = 自動（未登録の候補ブロックの先頭）、0 = 予選に記録しない、それ以外 = ブロック ID
+  let circles = {}, winner = null, blocks = [], blockPick = null, blockId = 0;
   const sides = () => ({ a: circles[$('a').value], b: circles[$('b').value] });
   const weight = () => document.querySelector('input[name=weight]:checked').value;
+  const chosenBlock = () => blocks.find(b => b.id === blockId) || null;
+  // 2 サークルがそろって所属するブロックのうち、まだこの組み合わせを登録していないものを候補にする
+  function renderBlockOpt() {
+    const { a, b } = sides();
+    const shared = a && b && a.id !== b.id ? blocks.filter(x => x.members.includes(a.id) && x.members.includes(b.id)) : [];
+    const open = shared.filter(x => !playedPair(x, a.id, b.id));
+    const done = shared.filter(x => playedPair(x, a.id, b.id));
+    const auto = open.length ? open[0].id : 0;
+    blockId = blockPick === null ? auto : (blockPick === 0 || open.some(x => x.id === blockPick) ? blockPick : auto);
+    $('blockOpt').hidden = !shared.length;
+    $('blockSeg').innerHTML = open.length ? open.map(x =>
+      `<label><input type="radio" name="block" value="${x.id}" ${blockId === x.id ? 'checked' : ''}><span>${esc(x.name)} の試合として記録</span></label>`).join('')
+      + `<label><input type="radio" name="block" value="0" ${blockId === 0 ? 'checked' : ''}><span>予選に記録しない</span></label>` : '';
+    $('blockNote').textContent = done.length
+      ? `${done.map(x => `「${x.name}」`).join('')}ではこの組み合わせの試合が登録済みです${open.length ? '' : '（レートのみ反映されます）'}。` : '';
+  }
+  $('blockSeg').addEventListener('change', e => { blockPick = Number(e.target.value); update(); });
   function fill(list) {
     list.forEach(c => circles[c.id] = c);
     const opts = list.slice().sort(byKana).map(c => `<option value="${c.id}">${esc(c.university)} / ${esc(c.name)}</option>`).join('');
@@ -642,7 +818,8 @@ function viewMatch(_, alive) {
     const gain = k * (1 - ew), loss = -gain;
     return `<div class="pv-row"><span class="res res-win">勝</span><span>${esc(w.name)}</span><span class="pv-rate">${fmtRate(w.rating_exact)} → ${fmtRate(w.rating_exact + gain)}</span><span class="h-delta up">${fmtDelta(roundHalfUp(gain))}</span></div>
       <div class="pv-row"><span class="res res-lose">負</span><span>${esc(l.name)}</span><span class="pv-rate">${fmtRate(l.rating_exact)} → ${fmtRate(l.rating_exact + loss)}</span><span class="h-delta down">${fmtDelta(roundHalfUp(loss))}</span></div>
-      <p class="muted small">${weight() === 'tournament' ? `トーナメント試合（変動 ×${TOURNAMENT_WEIGHT}）` : '通常試合'}・予想変動値</p>`;
+      <p class="muted small">${weight() === 'tournament' ? `トーナメント試合（変動 ×${TOURNAMENT_WEIGHT}）` : '通常試合'}・予想変動値</p>
+      ${chosenBlock() ? `<p class="small"><span class="tag tag-b">${esc(chosenBlock().name)}</span> の勝敗としても記録します</p>` : ''}`;
   }
   function update() {
     const { a, b } = sides();
@@ -655,12 +832,13 @@ function viewMatch(_, alive) {
     const same = a && b && a.id === b.id;
     $('msg').hidden = !same;
     $('msg').textContent = same ? '同じサークル同士は登録できません' : '';
+    renderBlockOpt();
     const ready = a && b && !same && winner;
     $('submit').disabled = !ready;
     $('preview').hidden = !ready;
     if (ready) $('preview').innerHTML = previewHtml();
   }
-  ['a', 'b'].forEach(id => $(id).addEventListener('change', () => { winner = null; update(); }));
+  ['a', 'b'].forEach(id => $(id).addEventListener('change', () => { winner = null; blockPick = null; update(); }));
   document.querySelectorAll('input[name=weight]').forEach(r => r.addEventListener('change', update));
   $('winnerPick').addEventListener('click', e => { const b = e.target.closest('button'); if (b && !b.disabled) { winner = b.dataset.side; update(); } });
   $('form').addEventListener('submit', e => { e.preventDefault(); $('confirmBody').innerHTML = previewHtml(); $('confirm').showModal(); });
@@ -670,13 +848,18 @@ function viewMatch(_, alive) {
     const [w, l] = winner === 'a' ? [a, b] : [b, a];
     $('ok').disabled = true;
     try {
-      const r = await rpc('submit_match', { p_password: $('pw').value, p_winner: w.id, p_loser: l.id, p_tournament: weight() === 'tournament' });
+      const args = { p_password: $('pw').value, p_winner: w.id, p_loser: l.id, p_tournament: weight() === 'tournament' };
+      if (blockId) args.p_block_id = blockId;  // 予選に記録しないときは送らない（更新前のデータベースとも互換）
+      const r = await rpc('submit_match', args);
       $('pw').value = '';
       $('confirm').close();
-      toast(`登録しました：${r.winner.name} ${fmtDelta(roundHalfUp(r.winner.delta))} / ${r.loser.name} ${fmtDelta(roundHalfUp(r.loser.delta))}`);
+      toast(`登録しました：${r.winner.name} ${fmtDelta(roundHalfUp(r.winner.delta))} / ${r.loser.name} ${fmtDelta(roundHalfUp(r.loser.delta))}${r.block ? `（${r.block}）` : ''}`);
       circles = {};
-      fill(await fetchRanking());
+      const [list, bl] = await Promise.all([fetchRanking(), fetchBlocks()]);
+      blocks = bl || [];
+      fill(list);
       winner = null;
+      blockPick = null;
       update();
     } catch (err) {
       $('confirm').close();
@@ -684,7 +867,9 @@ function viewMatch(_, alive) {
       $('msg').textContent = err.message;
     } finally { $('ok').disabled = false; }
   };
-  fetchRanking().then(list => { if (alive()) fill(list); }).catch(failView);
+  Promise.all([fetchRanking(), fetchBlocks()])
+    .then(([list, bl]) => { if (!alive()) return; blocks = bl || []; fill(list); })
+    .catch(failView);
 }
 
 // ================================================================ 設定
@@ -699,6 +884,7 @@ async function viewSettings(_, alive) {
   view.innerHTML = `<h1 class="page-title">設定</h1>
   <div class="tabs" role="tablist">
     <button class="tab active" data-tab="circles">サークル管理</button>
+    <button class="tab" data-tab="blocks">予選ブロック</button>
     <button class="tab" data-tab="bonus">ボーナス付与</button>
     <button class="tab" data-tab="adjust">レート調整</button>
     <button class="tab" data-tab="simple">過去試合（±16）</button>
@@ -713,6 +899,13 @@ async function viewSettings(_, alive) {
       <button class="btn primary" id="newCircle">＋ 新規登録</button></div>
     <input id="circleFilter" type="search" class="filter" placeholder="絞り込み">
     <ul id="adminCircles" class="admin-list"></ul>
+  </section>
+
+  <section class="panel tab-panel" id="tab-blocks" hidden>
+    <div class="row-between"><h2 class="section-title">予選ブロック</h2>
+      <button class="btn primary" id="newBlock">＋ ブロック作成</button></div>
+    <p class="muted small">ブロックに登録したサークル同士の勝敗登録は、自動でそのブロックの試合として記録されます。ブロックを削除してもレートは変わりません。</p>
+    <ul id="adminBlocks" class="admin-list"></ul>
   </section>
 
   <form class="panel tab-panel form" id="tab-bonus" hidden>
@@ -744,6 +937,7 @@ async function viewSettings(_, alive) {
       <div class="field"><label for="simL">敗者</label><select id="simL" required></select></div>
     </div>
     <div class="field"><label for="simReason">メモ（任意）</label><input id="simReason" placeholder="例：2025年 春季リーグ"></div>
+    <div class="field"><label for="simBlock">予選ブロックの試合として記録（任意）</label><select id="simBlock"></select></div>
     <button class="btn primary block">反映する</button>
   </form>
 
@@ -756,7 +950,7 @@ async function viewSettings(_, alive) {
   </form>
 
   <section class="panel tab-panel" id="tab-events" hidden>
-    <h2 class="section-title">最近の登録（最新 30 件）</h2>
+    <h2 class="section-title">最近の登録（最新 50 件）</h2>
     <p class="muted small">誤登録を取り消すと、その登録による変動分が現在のレートから差し戻されます。レート均一化も取り消せます。</p>
     <ul id="events" class="admin-list"></ul>
   </section>
@@ -779,6 +973,21 @@ async function viewSettings(_, alive) {
     </form>
     <button class="btn block" id="logout">ログアウト</button>
   </section>
+
+  <dialog id="blockDialog" class="dialog">
+    <form id="blockForm" class="form">
+      <h2 id="bdTitle">予選ブロック作成</h2>
+      <div class="field"><label for="bdName">ブロック名</label><input id="bdName" required maxlength="50" placeholder="例：予選ブロックA"></div>
+      <div class="field"><span class="label">メンバー <span class="muted small" id="bdCount"></span></span>
+        <input id="bdFilter" type="search" class="filter" placeholder="絞り込み"><div id="bdList" class="check-list"></div></div>
+      <p id="bdMsg" class="error" hidden></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn danger" id="bdDelete">削除</button><span class="spacer"></span>
+        <button type="button" class="btn" id="bdCancel">キャンセル</button>
+        <button type="submit" class="btn primary">保存</button>
+      </div>
+    </form>
+  </dialog>
 
   <dialog id="circleDialog" class="dialog">
     <form id="circleForm" class="form">
@@ -812,13 +1021,19 @@ async function viewSettings(_, alive) {
   document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
   try { const t = sessionStorage.getItem('settingsTab'); if (t && $('tab-' + t)) showTab(t); } catch (e) {}
 
+  let blocks = [];
   async function reload() {
-    const list = await fetchRanking();
+    const [list, bl] = await Promise.all([fetchRanking(), fetchBlocks()]);
     if (!alive()) return;
     circles = list.slice().sort(byKana);
+    blocks = bl || [];
     $('circleCount').textContent = `${circles.length} 件`;
     renderAdminCircles();
+    renderAdminBlocks(bl === null);
     renderBonusList();
+    const sv = $('simBlock').value;
+    $('simBlock').innerHTML = '<option value="">記録しない</option>' + blocks.map(b => `<option value="${b.id}">${esc(b.name)}</option>`).join('');
+    $('simBlock').value = blocks.some(b => String(b.id) === sv) ? sv : '';
     const opts = '<option value="">選択してください</option>' +
       circles.map(c => `<option value="${c.id}">${esc(c.university)} / ${esc(c.name)}（${fmtRate(c.rating_exact)}）</option>`).join('');
     ['adjCircle', 'simW', 'simL'].forEach(id => { const v = $(id).value; $(id).innerHTML = opts; $(id).value = v; });
@@ -876,6 +1091,68 @@ async function viewSettings(_, alive) {
     catch (err) { $('cdMsg').hidden = false; $('cdMsg').textContent = err.message; }
   };
 
+  // ---- 予選ブロック
+  function renderAdminBlocks(unavailable) {
+    $('newBlock').disabled = unavailable;
+    if (unavailable) {
+      $('adminBlocks').innerHTML = '<li class="muted">データベースが予選機能に未対応です。最新の supabase-setup.sql を Supabase の SQL Editor で実行してください。</li>';
+      return;
+    }
+    const byId = new Map(circles.map(c => [c.id, c]));
+    $('adminBlocks').innerHTML = blocks.map(b => {
+      const st = blockStandings({ ...b, members: b.members.filter(id => byId.has(id)) });
+      const names = b.members.map(id => byId.get(id)).filter(Boolean).sort(byKana).map(c => esc(c.name)).join('、');
+      return `<li><span class="al-main"><small>${b.members.length} サークル・${st.complete ? '全試合終了' : `${st.played} / ${st.total} 試合`}</small>
+        <b>${esc(b.name)}</b><br><span class="muted small">${names || 'メンバー未登録'}</span></span>
+        <button class="btn small-btn" data-block="${b.id}">編集</button></li>`;
+    }).join('') || '<li class="muted">予選ブロックはまだありません</li>';
+  }
+  $('adminBlocks').addEventListener('click', e => { const b = e.target.closest('[data-block]'); if (b) openBlock(blocks.find(x => x.id === Number(b.dataset.block))); });
+  $('newBlock').onclick = () => openBlock(null);
+
+  let editingBlock = null;
+  const blockChecked = new Set();
+  function renderBlockList() {
+    const term = normalize($('bdFilter').value);
+    $('bdList').innerHTML = circles.filter(c => matches(c, term)).map(c => `
+      <label class="check"><input type="checkbox" value="${c.id}" ${blockChecked.has(c.id) ? 'checked' : ''}><span>${esc(c.university)} / ${esc(c.name)}</span></label>`).join('');
+    $('bdCount').textContent = `${blockChecked.size} サークル選択中`;
+  }
+  function openBlock(b) {
+    editingBlock = b;
+    blockChecked.clear();
+    (b ? b.members : []).forEach(id => blockChecked.add(id));
+    $('bdTitle').textContent = b ? '予選ブロック編集' : '予選ブロック作成';
+    $('bdName').value = b ? b.name : '';
+    $('bdFilter').value = '';
+    $('bdDelete').hidden = !b;
+    $('bdMsg').hidden = true;
+    renderBlockList();
+    $('blockDialog').showModal();
+  }
+  $('bdFilter').addEventListener('input', renderBlockList);
+  $('bdList').addEventListener('change', e => {
+    const id = Number(e.target.value);
+    e.target.checked ? blockChecked.add(id) : blockChecked.delete(id);
+    $('bdCount').textContent = `${blockChecked.size} サークル選択中`;
+  });
+  $('bdCancel').onclick = () => $('blockDialog').close();
+  $('blockForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    try {
+      const r = await adminRpc('admin_save_block', { p_id: editingBlock ? editingBlock.id : null, p_name: $('bdName').value });
+      await adminRpc('admin_set_block_members', { p_id: r.id, p_ids: [...blockChecked] });
+      $('blockDialog').close();
+      toast(editingBlock ? 'ブロックを更新しました' : 'ブロックを作成しました');
+      reload();
+    } catch (err) { $('bdMsg').hidden = false; $('bdMsg').textContent = err.message; }
+  });
+  $('bdDelete').onclick = async () => {
+    if (!await confirmDialog(`「${editingBlock.name}」を削除しますか？\nこのブロック内の勝敗記録も削除されます（レートは変わりません）。元に戻せません。`, '削除する', true)) return;
+    try { await adminRpc('admin_delete_block', { p_id: editingBlock.id }); $('blockDialog').close(); toast('ブロックを削除しました'); reload(); }
+    catch (err) { $('bdMsg').hidden = false; $('bdMsg').textContent = err.message; }
+  };
+
   // ---- ボーナス
   const bonusChecked = new Set();
   function renderBonusList() {
@@ -923,9 +1200,12 @@ async function viewSettings(_, alive) {
     const w = find($('simW').value), l = find($('simL').value);
     if (!w || !l) return toast('勝者と敗者を選択してください', true);
     if (w.id === l.id) return toast('同じサークル同士は登録できません', true);
-    if (!await confirmDialog(`勝者：${w.name}（+16）\n敗者：${l.name}（−16）\nで反映します。`, '反映する')) return;
+    const blk = blocks.find(b => String(b.id) === $('simBlock').value);
+    if (!await confirmDialog(`勝者：${w.name}（+16）\n敗者：${l.name}（−16）\nで反映します。${blk ? `\n「${blk.name}」の試合としても記録します。` : ''}`, '反映する')) return;
     try {
-      await adminRpc('admin_simple', { p_winner: w.id, p_loser: l.id, p_reason: $('simReason').value });
+      const args = { p_winner: w.id, p_loser: l.id, p_reason: $('simReason').value };
+      if (blk) args.p_block_id = blk.id;
+      await adminRpc('admin_simple', args);
       toast('反映しました'); $('simW').value = $('simL').value = ''; $('simReason').value = ''; reload();
     } catch (err) { toast(err.message, true); }
   });
@@ -958,7 +1238,7 @@ async function viewSettings(_, alive) {
         const items = ev.items.map(i => ({ ...i, delta: roundHalfUp(i.delta) }));
         if (ev.kind === 'match' || ev.kind === 'simple') {
           const w = items.find(i => i.result === 'win'), l = items.find(i => i.result === 'lose');
-          desc = `${esc(w.circle)} <b class="up">${fmtDelta(w.delta)}</b> vs ${esc(l.circle)} <b class="down">${fmtDelta(l.delta)}</b>${ev.weight > 1 ? ' <span class="tag tag-t">トーナメント</span>' : ''}`;
+          desc = `${esc(w.circle)} <b class="up">${fmtDelta(w.delta)}</b> vs ${esc(l.circle)} <b class="down">${fmtDelta(l.delta)}</b>${ev.weight > 1 ? ' <span class="tag tag-t">トーナメント</span>' : ''}${ev.block ? ` <span class="tag tag-b">${esc(ev.block)}</span>` : ''}`;
         } else if (ev.kind === 'normalize') {
           desc = `${esc(ev.reason)}（${items.length} サークル）`;
         } else {
@@ -974,7 +1254,7 @@ async function viewSettings(_, alive) {
     if (!b) return;
     const msg = b.dataset.kind === 'normalize'
       ? 'このレート均一化を取り消しますか？\n全サークルのレートが均一化前の値（小数を含む）に戻ります。\n均一化の後に登録した試合などの変動分はそのまま残ります。'
-      : 'この登録を取り消しますか？\n変動分が現在のレートから差し戻されます。';
+      : 'この登録を取り消しますか？\n変動分が現在のレートから差し戻されます。予選ブロックの試合なら、ブロック内の勝敗記録も消えます。';
     if (!await confirmDialog(msg, '取り消す', true)) return;
     try { await adminRpc('admin_undo', { p_event: b.dataset.undo }); toast('取り消しました'); loadEvents(); reload(); }
     catch (err) { toast(err.message, true); }
