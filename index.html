@@ -172,7 +172,15 @@ a:hover { text-decoration: underline; }
 .cross .c-name { min-width: 200px; }
 .cross .c-name a { display: flex; align-items: center; gap: 8px; color: var(--text); }
 .cross .c-name a:hover { text-decoration: none; color: #fff; }
-.b-no { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-family: "Roboto Condensed", sans-serif; font-size: 12px; background: #24335e; color: #c8d2ee; }
+.b-no { flex: none; width: 24px; height: 24px; border-radius: 50%; display: inline-grid; place-items: center; font-family: "Roboto Condensed", sans-serif; font-size: 13px; background: #24335e; color: #c8d2ee; }
+.b-no.sm { width: 20px; height: 20px; font-size: 11.5px; vertical-align: -5px; }
+/* 暫定順位は枠線のみ、確定順位は塗りつぶし */
+.b-no.prov { background: transparent; border: 1.5px dashed var(--accent); color: #c3cbff; }
+.b-no.final { background: var(--accent-strong); color: #fff; }
+.b-no.final.m1 { background: var(--gold); color: #1a1405; }
+.b-no.final.m2 { background: var(--silver); color: #10151f; }
+.b-no.final.m3 { background: var(--bronze); color: #1d0f05; }
+.b-names .tag { margin-left: 2px; }
 .b-names { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; font-weight: 700; }
 .b-names small { font-weight: 400; color: var(--muted); font-size: 11.5px; }
 .b-rank { font-family: "Roboto Condensed", sans-serif; font-size: 20px; font-weight: 700; margin-right: 2px; }
@@ -630,7 +638,7 @@ function viewRanking(_, alive) {
 function viewBlocks(_, alive) {
   document.title = '予選 | スマサーGPA';
   view.innerHTML = `<h1 class="page-title">予選ブロック</h1>
-    <p class="muted small">ブロック内の総当たりが終わると順位が表示されます。順位は勝ち数で決まり、同数のときは直接対決の結果で決めます（三つ巴などで決まらない場合は同列）。レートとは関係ありません。</p>
+    <p class="muted small">進行中は、サークル名の横に勝ち数による暫定順位を表示します。総当たりが終わると順位が確定します。確定順位は勝ち数で決まり、同数のときは直接対決の結果で決めます（三つ巴などで決まらない場合は同列）。レートとは関係ありません。</p>
     <div id="blocks"><section class="panel"><p class="loading">読み込み中…</p></section></div>`;
   async function load() {
     try {
@@ -648,13 +656,33 @@ function viewBlocks(_, alive) {
   load();
 }
 
+// 進行中の暫定順位: 勝ち数のみで決める（同数は同順位）。並びは勝ち数 → 負け数の少なさ → 大学名の読み順
+function provisionalStandings(members, st) {
+  const order = members.slice().sort((a, b) =>
+    st.wins.get(b.id) - st.wins.get(a.id) || st.losses.get(a.id) - st.losses.get(b.id) || byKana(a, b));
+  const rank = new Map();
+  order.forEach((c, i) => {
+    const prev = order[i - 1];
+    rank.set(c.id, prev && st.wins.get(prev.id) === st.wins.get(c.id) ? rank.get(prev.id) : i + 1);
+  });
+  return { order, rank };
+}
+
 function blockTableHtml(b, byId) {
-  // 番号はメンバーの大学名の読み順で固定（列見出しと行の対応用）
   const members = b.members.map(id => byId.get(id)).filter(Boolean).sort(byKana);
-  const no = new Map(members.map((c, i) => [c.id, i + 1]));
   const block = { ...b, members: members.map(c => c.id) };
   const st = blockStandings(block);
-  const rows = st.complete ? st.order.map(id => byId.get(id)) : members;
+  // 名前の横の番号: 進行中は暫定順位、全試合終了後は確定順位。列の並びも行と同じ順にする
+  let rows, no;
+  if (st.complete) {
+    rows = st.order.map(id => byId.get(id));
+    no = new Map(rows.map(c => [c.id, st.rank.get(c.id).rank]));
+  } else {
+    const pv = provisionalStandings(members, st);
+    rows = pv.order;
+    no = pv.rank;
+  }
+  const noCls = st.complete ? 'b-no final' : 'b-no prov';
   const status = members.length < 2 ? '<span class="tag">メンバー登録待ち</span>'
     : st.complete ? '<span class="tag tag-done">全試合終了</span>'
     : `<span class="tag">${st.played} / ${st.total} 試合</span>`;
@@ -667,18 +695,18 @@ function blockTableHtml(b, byId) {
   return `<section class="panel block">
     <div class="row-between"><h2 class="section-title">${esc(b.name)}</h2>${status}</div>
     ${members.length ? `<div class="table-scroll"><table class="cross">
-      <thead><tr><th class="c-rank">順位</th><th class="c-name">サークル</th>
-        ${members.map(c => `<th class="x" title="${esc(c.name)}">${no.get(c.id)}</th>`).join('')}
+      <thead><tr><th class="c-name">${st.complete ? '順位・サークル' : '暫定順位・サークル'}</th>
+        ${rows.map(c => `<th class="x" title="${esc(c.name)}"><span class="${noCls} sm">${no.get(c.id)}</span></th>`).join('')}
         <th class="c-num">勝</th><th class="c-num">負</th></tr></thead>
       <tbody>${rows.map(r => {
-        const rk = st.rank.get(r.id);
-        const rankHtml = st.complete ? `<span class="b-rank b-rank${rk.rank}">${rk.rank}</span>${rk.tied ? '<span class="tag">同列</span>' : ''}` : '<span class="muted">―</span>';
-        return `<tr><td class="c-rank">${rankHtml}</td>
-          <td class="c-name"><a href="#/circles/${r.id}"><span class="b-no">${no.get(r.id)}</span>${logoHtml(r, 'mini-logo')}<span class="b-names"><small>${esc(r.university)}</small>${esc(r.name)}</span></a></td>
-          ${members.map(c => cell(r, c)).join('')}
+        const tied = st.complete && st.rank.get(r.id).tied;
+        const medal = st.complete && no.get(r.id) <= 3 ? ` m${no.get(r.id)}` : '';
+        return `<tr>
+          <td class="c-name"><a href="#/circles/${r.id}"><span class="${noCls}${medal}" title="${st.complete ? '順位' : '暫定順位（勝ち数順）'}">${no.get(r.id)}</span>${logoHtml(r, 'mini-logo')}<span class="b-names"><small>${esc(r.university)}${tied ? ' <span class="tag">同列</span>' : ''}</small>${esc(r.name)}</span></a></td>
+          ${rows.map(c => cell(r, c)).join('')}
           <td class="c-num">${st.wins.get(r.id)}</td><td class="c-num">${st.losses.get(r.id)}</td></tr>`;
       }).join('')}</tbody></table></div>
-      ${!st.complete && members.length >= 2 ? `<p class="muted small">総当たりが終わると順位が表示されます（残り ${st.total - st.played} 試合）。</p>` : ''}`
+      ${!st.complete && members.length >= 2 ? `<p class="muted small"><span class="b-no prov sm">1</span> の番号は勝ち数による暫定順位です。総当たりが終わると順位が確定します（残り ${st.total - st.played} 試合）。</p>` : ''}`
     : '<p class="muted">メンバーが登録されていません。</p>'}
   </section>`;
 }
